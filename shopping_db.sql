@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-10-2023 a las 16:12:03
+-- Tiempo de generación: 25-10-2023 a las 03:42:22
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -34,6 +34,22 @@ CREATE TABLE `category` (
   `created_at` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `category`
+--
+
+INSERT INTO `category` (`id_category`, `name_category`, `description_category`, `created_at`) VALUES
+(1, 'Electronics', 'Category for electronic devices', '2023-10-24'),
+(2, 'Clothing', 'Category for clothing and apparel', '2023-10-24'),
+(3, 'Home', 'Category for home and kitchen products', '2023-10-24'),
+(4, 'Books', 'Category for books and literature', '2023-10-24'),
+(5, 'Beauty', 'Category for beauty and personal care products', '2023-10-24'),
+(6, 'Toys', 'Category for toys and games', '2023-10-24'),
+(7, 'Sports', 'Category for sports and fitness products', '2023-10-24'),
+(8, 'Automotive', 'Category for automotive and car accessories', '2023-10-24'),
+(9, 'Health', 'Category for health and wellness products', '2023-10-24'),
+(10, 'Grocery', 'Category for grocery and food items', '2023-10-24');
+
 -- --------------------------------------------------------
 
 --
@@ -46,6 +62,13 @@ CREATE TABLE `product` (
   `description_product` varchar(255) NOT NULL,
   `created_at` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `product`
+--
+
+INSERT INTO `product` (`id_product`, `name_product`, `description_product`, `created_at`) VALUES
+(1, 'Cuaderno', 'cuaderno doble linea.', '2023-10-24');
 
 -- --------------------------------------------------------
 
@@ -60,6 +83,13 @@ CREATE TABLE `rel_product_category` (
   `status_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `rel_product_category`
+--
+
+INSERT INTO `rel_product_category` (`id_relprocat`, `product_id`, `category_id`, `status_id`) VALUES
+(1, 1, 4, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -70,6 +100,14 @@ CREATE TABLE `status` (
   `id_status` int(11) NOT NULL,
   `description_status` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `status`
+--
+
+INSERT INTO `status` (`id_status`, `description_status`) VALUES
+(1, 'active'),
+(2, 'inactive');
 
 -- --------------------------------------------------------
 
@@ -133,25 +171,25 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT de la tabla `category`
 --
 ALTER TABLE `category`
-  MODIFY `id_category` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_category` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `product`
 --
 ALTER TABLE `product`
-  MODIFY `id_product` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_product` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `rel_product_category`
 --
 ALTER TABLE `rel_product_category`
-  MODIFY `id_relprocat` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_relprocat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `status`
 --
 ALTER TABLE `status`
-  MODIFY `id_status` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_status` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `user`
