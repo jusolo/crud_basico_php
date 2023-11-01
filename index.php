@@ -105,21 +105,16 @@ if (isset($_GET['action'])) {
       }
       break;
     case 'delete':
-      if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $id = $_POST['id'];
-        $result = $controller->delete($id);
-        if ($result) {
-          $tipo = "success";
-          $msg = "product deleted successfully!";
-          header('Location: index.php?action=read');
-        } else {
-          $tipo = "danger";
-          $msg = "the product could not be deleted!";
-          header('Location: index.php?action=read');
-        }
+    case 'generatePdf':
+      $products = $controller->readAll();
+      $result = $controller->createPdf($products);
+      if ($result) {
+        $tipo = "success";
+        $msg = "product deleted successfully!";
+        // header('Location: index.php?action=read');
       } else {
-        $tipo = "warning";
-        $msg = "an unknown error occurred!";
+        $tipo = "danger";
+        $msg = "the product could not be deleted!";
         header('Location: index.php?action=read');
       }
       break;

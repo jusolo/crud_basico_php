@@ -1,7 +1,8 @@
 <?php include "./layout/header.php" ?>
 
-<div class="container">
+<div class="container my-3">
   <a href="index.php?action=viewCreate" class="btn btn-primary my-3">New product</a>
+  <a href="index.php?action=generatePdf" target="_blank" class="btn btn-dark my-3">Generate pdf</a>
   <?php
   echo $msg;
   if (strlen($msg) > 0) {
@@ -20,28 +21,39 @@
         <th scope="col">#</th>
         <th scope="col">Name</th>
         <th scope="col">Description</th>
-        <th scope="col">Category</th>
+        <th scope="col">Categories</th>
         <th scope="col">Status</th>
         <th scope="col">Date</th>
         <th scope="col">Options</th>
       </tr>
     </thead>
     <tbody>
-      <?php $cont = 1;
-      foreach ($products as $product) : ?>
-        <tr>
-          <th scope="row"><?php echo $cont; ?></th>
-          <td><?php echo $product['nameProduct']; ?></td>
-          <td><?php echo $product['desProduct']; ?></td>
-          <td><?php echo $product['nameCategory']; ?></td>
-          <td><?php echo $product['desStatus']; ?></td>
-          <td><?php echo $product['fecProduct']; ?></td>
-          <td>
-            <a class="btn btn-warning" href="index.php?action=viewUpdate&id=<?php echo $product['idProduct']; ?>"><i class="fa-solid fa-pen-to-square"></i></a>
-            <a class="btn btn-danger" href="index.php?action=viewDelete&id=<?php echo $product['idProduct']; ?>"><i class="fa-solid fa-trash"></i></a>
-          </td>
-        </tr>
-      <?php $cont++;
+      <?php
+      foreach ($products as $product) :
+        foreach ($product['dataProduct'] as $data) :
+      ?>
+          <tr>
+            <td><?php echo $data['idProduct']; ?></td>
+            <td><?php echo $data['nameProduct']; ?></td>
+            <td><?php echo $data['desProduct']; ?></td>
+            <td><?php
+                $lastKey = array_key_last($product['dataCategories']);
+                foreach ($product['dataCategories'] as $key => $category) {
+                  echo $category['nameCategory'];
+                  if ($key !== $lastKey) {
+                    echo " - ";
+                  }
+                } ?>
+            </td>
+            <td><?php echo $data['desStatus']; ?></td>
+            <td><?php echo $data['fecProduct']; ?></td>
+            <td>
+              <a class="btn btn-warning" href="index.php?action=viewUpdate&id=<?php echo $data['idProduct']; ?>"><i class="fa-solid fa-pen-to-square"></i></a>
+              <a class="btn btn-danger" href="index.php?action=viewDelete&id=<?php echo $data['idProduct']; ?>"><i class="fa-solid fa-trash"></i></a>
+            </td>
+          </tr>
+      <?php
+        endforeach;
       endforeach; ?>
     </tbody>
   </table>

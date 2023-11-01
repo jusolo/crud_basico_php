@@ -31,4 +31,8 @@ class Controller {
     public function delete($id) {
         return $this->model->deleteItem($id);
     }
+
+    public function createPdf($obj) {
+        return $this->model->createPdf($obj);
+    }
 }
